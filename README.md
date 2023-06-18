@@ -1,2 +1,2 @@
-# Spring Project (topic tbd)
+# MyPlace
 New Spring Project
