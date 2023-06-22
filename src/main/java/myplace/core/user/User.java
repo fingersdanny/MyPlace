@@ -1,4 +1,4 @@
-package myplace.core.member;
+package myplace.core.user;
 
 
 import lombok.Data;
@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 
 @Entity
 @Data
-public class Member {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
