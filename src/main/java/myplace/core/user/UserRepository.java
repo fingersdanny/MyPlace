@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Component
 public interface UserRepository extends CrudRepository<User, Long> {
     User save(User member);
     Optional<User> findById(Long id);
