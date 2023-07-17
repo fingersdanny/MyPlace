@@ -2,11 +2,18 @@ package myplace.core.user;
 
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.util.Optional;
 
 
 @Component
 public class MySqlUserRepository implements UserRepository {
+
+    private final DataSource dataSource;
+
+    public MySqlUserRepository(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Override
     public User save(User member) {
