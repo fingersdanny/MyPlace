@@ -1,9 +1,7 @@
 package myplace.core.controller;
 
 import lombok.RequiredArgsConstructor;
-import myplace.core.user.UserCreateForm;
-import myplace.core.user.UserService;
-import myplace.core.user.UserServiceImpl;
+import myplace.core.user.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
     private final UserServiceImpl userService;
+    private final MySqlUserRepository userRepository;
 
     @GetMapping("/signup")
     public String signupForm(UserCreateForm userCreateForm) {
@@ -23,8 +22,8 @@ public class UserController {
 
     @PostMapping("/signup")
     public String signup(UserCreateForm userCreateForm) {
-        userService.create(userCreateForm.getName(), userCreateForm.getUsername(), userCreateForm.getPassword(), userCreateForm.getEmail());
-
+        User user = userService.create(userCreateForm.getName(), userCreateForm.getUsername(), userCreateForm.getPassword(), userCreateForm.getEmail());
+        userRepository.save(user);
         return "redirect:/";
     }
 }
