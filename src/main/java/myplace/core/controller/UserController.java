@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @GetMapping("/signup")
     public String signupForm(UserCreateForm userCreateForm) {
@@ -21,8 +21,10 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public User signup(UserCreateForm userCreateForm) {
+    public String signup(UserCreateForm userCreateForm) {
         User user = userService.create(userCreateForm.getName(), userCreateForm.getUsername(), userCreateForm.getPassword(), userCreateForm.getEmail());
-        return userRepository.save(user);
+
+        userService.join(user);
+        return "redirect:/";
     }
 }
