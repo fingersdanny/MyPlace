@@ -1,8 +1,8 @@
 package myplace.core.controller;
 
 import lombok.RequiredArgsConstructor;
-import myplace.core.user.UserCreateForm;
-import myplace.core.user.UserService;
+import myplace.core.user.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +22,9 @@ public class UserController {
 
     @PostMapping("/signup")
     public String signup(UserCreateForm userCreateForm) {
-        userService.create(userCreateForm.getName(), userCreateForm.getUsername(), userCreateForm.getPassword(), userCreateForm.getEmail());
+        User user = userService.create(userCreateForm.getName(), userCreateForm.getUsername(), userCreateForm.getPassword(), userCreateForm.getEmail());
 
+        userService.join(user);
         return "redirect:/";
     }
 }
